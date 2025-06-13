@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:recipes_app/api/api.dart';
 
 class Helper {
-   static void addRecipe(ScaffoldMessengerState messenger) async {
+  static void addRecipe(ScaffoldMessengerState messenger) async {
     var data = {"name": "Tasty Pizza1"};
     var response = await Api().addRecipe(data);
     messenger.showSnackBar(
@@ -12,28 +14,36 @@ class Helper {
       ),
     );
   }
+
   static void updateRecipe(ScaffoldMessengerState messenger) async {
     var data = {"name": "Tasty Pizza"};
     var response = await Api().updateRecipe('1', data);
+    final decoded = jsonDecode(response);
+    final data1 = decoded is String ? jsonDecode(decoded) : decoded;
+    
     messenger.showSnackBar(
       SnackBar(
         backgroundColor: Colors.blue,
-        content: Text("Recipe updated: ${response.toString()}"),
+        content: Text("Recipe updated: ${data1.toString()}"),
       ),
     );
   }
 
- static void deleteRecipeById(ScaffoldMessengerState messenger) async {
-    var response = await Api().deleteRecipeById('1');
+  static void deleteRecipeById(ScaffoldMessengerState messenger) async {
+    var response = await Api().deleteRecipeById('2');
+    final decoded = jsonDecode(response);
+    final data = decoded is String ? jsonDecode(decoded) : decoded;
     messenger.showSnackBar(
       SnackBar(
         backgroundColor: Colors.red,
-        content: Text("Recipe deleted: ${response.toString()}"),
+        content: Text(
+          "Recipe deleted: ${data["isDeleted"]}, \nDelete On ${data["deletedOn"]} ",
+        ),
       ),
     );
   }
 
-static  void showRecipeOptions(BuildContext context) {
+  static void showRecipeOptions(BuildContext context) {
     showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -74,5 +84,4 @@ static  void showRecipeOptions(BuildContext context) {
       },
     );
   }
-  
 }

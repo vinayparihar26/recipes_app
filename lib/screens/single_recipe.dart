@@ -50,7 +50,7 @@ class _SingleRecipeState extends State<SingleRecipe> {
 
                       child: Image.network(
                         recipe!.image ?? '',
-                        height: 200,
+                        height: 0.25*getHeight(context),
                         width: double.infinity,
                         fit: BoxFit.fill,
                         errorBuilder:
@@ -61,7 +61,7 @@ class _SingleRecipeState extends State<SingleRecipe> {
 
                 Text(
                   recipe?.name ?? 'No name available',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20*getResponsive(context), fontWeight: FontWeight.bold),
                 ),
 
                 SizedBox(height: 0.01 * getHeight(context)),
@@ -71,7 +71,7 @@ class _SingleRecipeState extends State<SingleRecipe> {
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(CupertinoIcons.timer, size: 25),
+                        Icon(CupertinoIcons.timer, size: 25*getResponsive(context)),
                         Text('${recipe?.cookTimeMinutes ?? 'N/A'} min'),
                       ],
                     ),
@@ -79,14 +79,14 @@ class _SingleRecipeState extends State<SingleRecipe> {
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(CupertinoIcons.timer, size: 25),
+                        Icon(CupertinoIcons.timer, size: 25*getResponsive(context)),
                         Text(' ${recipe?.servings ?? 'N/A'} serving'),
                       ],
                     ),
                     SizedBox(width: 0.10 * getWidth(context)),
                     Column(
                       children: [
-                        Icon(CupertinoIcons.clock, size: 25),
+                        Icon(CupertinoIcons.clock, size: 25*getResponsive(context)),
                         Text('${recipe?.caloriesPerServing ?? 'N/A'} kcal'),
                       ],
                     ),
@@ -98,33 +98,33 @@ class _SingleRecipeState extends State<SingleRecipe> {
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.green,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        borderRadius: BorderRadius.all(Radius.circular(5*getResponsive(context))),
                       ),
                     
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           recipe?.difficulty ?? 'No difficulty available',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 18*getResponsive(context)),
                         ),
                       ),
                     ),
 
-                    SizedBox(width: 0.02 * getWidth(context)),
+                    SizedBox(width: 0.01 * getWidth(context)),
                     Container(
                       color: Colors.green,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8),
                         child: Text(
                           ' ${recipe?.cuisine ?? 'No cuisine available'}',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 18*getResponsive(context)),
                         ),
                       ),
                     ),
                   ],
                 ),
 
-                Text('ingredients', style: TextStyle(fontSize: 18)),
+                Text('ingredients', style: TextStyle(fontSize: 18*getResponsive(context))),
                 recipe?.ingredients != null
                     ? ListView.builder(
                       shrinkWrap: true,
@@ -134,7 +134,7 @@ class _SingleRecipeState extends State<SingleRecipe> {
                         var point = 1 + index1;
                         return Text(
                           '($point) ${recipe!.ingredients![index1]}',
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 15*getResponsive(context)),
                         );
                       },
                     )
@@ -145,7 +145,7 @@ class _SingleRecipeState extends State<SingleRecipe> {
                   color: Colors.black,
                   width: double.infinity,
                 ),
-                Text('instructions', style: TextStyle(fontSize: 20)),
+                Text('instructions', style: TextStyle(fontSize: 20*getResponsive(context))),
                 SizedBox(height: 0.02 * getHeight(context)),
                 recipe?.instructions != null
                     ? ListView.builder(
@@ -156,7 +156,7 @@ class _SingleRecipeState extends State<SingleRecipe> {
                         var point = 1 + index2;
                         return Text(
                           '($point) ${recipe!.instructions![index2]}',
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(fontSize: 15*getResponsive(context)),
                         );
                       },
                     )

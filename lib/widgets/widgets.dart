@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipes_app/responsive.dart';
 
 class Widgets {
   static verticalSpace(String height) {
@@ -13,6 +14,41 @@ class Widgets {
     return Text(
       text,
       style: style ?? TextStyle(fontSize: size?.width),
+      overflow: TextOverflow.ellipsis,
+      maxLines: 1,
+    );
+  }
+
+  static InputDecoration searchInputDecoration(
+    BuildContext context, {
+    String hint = "Search for recipes, meals...",
+  }) {
+    return InputDecoration(
+      hintText: hint,
+      fillColor: Colors.white,
+      filled: true,
+      prefixIcon: Icon(Icons.search),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.white,
+          width: 0.01 * getWidth(context),
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.white,
+          width: 0.01 * getWidth(context),
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+  }
+
+  static textBlack(String text, {TextStyle? style, Size? size}) {
+    return Text(
+      text,
+      style: style ?? TextStyle(fontSize: size?.width, color: Colors.black),
       overflow: TextOverflow.ellipsis,
       maxLines: 1,
     );
@@ -35,4 +71,27 @@ class Widgets {
       child: const Text('Button'),
     );
   }
+
+  static SizedBox heightSpacing(BuildContext context, double percent) {
+    return SizedBox(height: percent * getHeight(context));
+  }
+
+  static Widget headingText(BuildContext context, String text) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 20 * getResponsive(context),
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+ static ButtonStyle customButtonStyle() {
+  return ElevatedButton.styleFrom(
+    backgroundColor: const Color(0xFFCB202D),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  );
+}
 }

@@ -44,11 +44,11 @@ class Api {
 
   updateRecipe(String id, Map<String, dynamic> recipeData) async {
     var response = await restClient.updateRecipe(id, recipeData);
-    return jsonDecode(response);
+    return response;
   }
 
   Future<String> deleteRecipeById(String id) async {
     final response = await restClient.deleteRecipe(id);
-    return jsonDecode(response);
+    return jsonEncode(response); //encode for converting map into string
   }
 }
