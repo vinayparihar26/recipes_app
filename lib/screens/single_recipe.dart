@@ -27,30 +27,34 @@ class _SingleRecipeState extends State<SingleRecipe> {
     setState(() {
       recipe = Recipes.fromJson(response);
     });
-    print(response);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 227, 58, 72),
+        title: Text(recipe?.name ?? ''),
+        elevation: 4,
+      ),
       body: SizedBox(
         height: double.infinity,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(6.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 recipe == null
                     ? const CircularProgressIndicator()
                     : Card(
-                      elevation: 2,
-
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       child: Image.network(
                         recipe!.image ?? '',
-                        height: 0.25*getHeight(context),
+                        height: 0.25 * getHeight(context),
                         width: double.infinity,
                         fit: BoxFit.fill,
                         errorBuilder:
@@ -58,20 +62,20 @@ class _SingleRecipeState extends State<SingleRecipe> {
                                 const Icon(Icons.broken_image),
                       ),
                     ),
-
+                SizedBox(height: 0.02 * getHeight(context)),
                 Text(
                   recipe?.name ?? 'No name available',
-                  style: TextStyle(fontSize: 20*getResponsive(context), fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
 
                 SizedBox(height: 0.01 * getHeight(context)),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(CupertinoIcons.timer, size: 25*getResponsive(context)),
+                        Icon(CupertinoIcons.timer),
                         Text('${recipe?.cookTimeMinutes ?? 'N/A'} min'),
                       ],
                     ),
@@ -79,52 +83,52 @@ class _SingleRecipeState extends State<SingleRecipe> {
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(CupertinoIcons.timer, size: 25*getResponsive(context)),
+                        Icon(CupertinoIcons.person_2),
                         Text(' ${recipe?.servings ?? 'N/A'} serving'),
                       ],
                     ),
                     SizedBox(width: 0.10 * getWidth(context)),
                     Column(
                       children: [
-                        Icon(CupertinoIcons.clock, size: 25*getResponsive(context)),
+                        Icon(CupertinoIcons.flame),
                         Text('${recipe?.caloriesPerServing ?? 'N/A'} kcal'),
                       ],
                     ),
                   ],
                 ),
-
+                SizedBox(height: 0.01 * getHeight(context)),
                 Row(
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.all(Radius.circular(5*getResponsive(context))),
+                        color: Colors.green.shade100,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5 * getResponsive(context)),
+                        ),
                       ),
-                    
+
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           recipe?.difficulty ?? 'No difficulty available',
-                          style: TextStyle(fontSize: 18*getResponsive(context)),
                         ),
                       ),
                     ),
 
                     SizedBox(width: 0.01 * getWidth(context)),
                     Container(
-                      color: Colors.green,
+                      color: Colors.green.shade100,
                       child: Padding(
                         padding: const EdgeInsets.all(8),
                         child: Text(
                           ' ${recipe?.cuisine ?? 'No cuisine available'}',
-                          style: TextStyle(fontSize: 18*getResponsive(context)),
                         ),
                       ),
                     ),
                   ],
                 ),
-
-                Text('ingredients', style: TextStyle(fontSize: 18*getResponsive(context))),
+                SizedBox(height: 0.02 * getHeight(context)),
+                Text('ingredients'),
                 recipe?.ingredients != null
                     ? ListView.builder(
                       shrinkWrap: true,
@@ -132,9 +136,15 @@ class _SingleRecipeState extends State<SingleRecipe> {
                       itemCount: recipe!.ingredients!.length,
                       itemBuilder: (BuildContext context, int index1) {
                         var point = 1 + index1;
-                        return Text(
-                          '($point) ${recipe!.ingredients![index1]}',
-                          style: TextStyle(fontSize: 15*getResponsive(context)),
+                        return ListTile(
+                          leading: CircleAvatar(
+                            radius: 15,
+                            child: Text(
+                              '$point',
+                             
+                            ),
+                          ),
+                          title: Text(recipe!.ingredients![index1]),
                         );
                       },
                     )
@@ -145,7 +155,11 @@ class _SingleRecipeState extends State<SingleRecipe> {
                   color: Colors.black,
                   width: double.infinity,
                 ),
-                Text('instructions', style: TextStyle(fontSize: 20*getResponsive(context))),
+                SizedBox(height: 0.02 * getHeight(context)),
+                Text(
+                  'instructions',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 SizedBox(height: 0.02 * getHeight(context)),
                 recipe?.instructions != null
                     ? ListView.builder(
@@ -154,9 +168,12 @@ class _SingleRecipeState extends State<SingleRecipe> {
                       itemCount: recipe!.instructions!.length,
                       itemBuilder: (BuildContext context, int index2) {
                         var point = 1 + index2;
-                        return Text(
-                          '($point) ${recipe!.instructions![index2]}',
-                          style: TextStyle(fontSize: 15*getResponsive(context)),
+                        return ListTile(
+                          leading: CircleAvatar(
+                            radius: 15,
+                            child: Text('$point'),
+                          ),
+                          title: Text(recipe!.instructions![index2]),
                         );
                       },
                     )

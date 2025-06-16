@@ -127,13 +127,13 @@ double getChildAspectRatio(BuildContext context) {
                         padding: const EdgeInsets.only(left: 8.0),
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            backgroundColor: Colors.grey[200],
+                            backgroundColor:Color.fromARGB(255, 227, 58, 72),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
                           onPressed: () => getRecipesByMeal(meal),
-                          child: Text(isLast ? meal : '$meal,', softWrap: false),
+                          child: Text(isLast ? meal : '$meal,', softWrap: false, style: TextStyle(color: Colors.white),),
                         ),
                       );
                     },
@@ -152,11 +152,11 @@ double getChildAspectRatio(BuildContext context) {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    iconInfo(context,Icons.timer, '${recipe.cookTimeMinutes} min'),
-                    SizedBox(width: 6),
-                    iconInfo(context,Icons.restaurant_menu, '${recipe.servings} serv'),
-                    SizedBox(width: 6),
-                    iconInfo(context,Icons.local_fire_department, '${recipe.caloriesPerServing} kcal'),
+                    iconInfo(context,CupertinoIcons.timer, '${recipe.cookTimeMinutes} min'),
+                    SizedBox(width: 8),
+                    iconInfo(context,CupertinoIcons.person_2, '${recipe.servings} serv'),
+                    SizedBox(width: 8),
+                    iconInfo(context,CupertinoIcons.flame, '${recipe.caloriesPerServing} kcal'),
                   ],
                 ),
                 SizedBox(height: 10 * getResponsive(context)),
@@ -165,8 +165,7 @@ double getChildAspectRatio(BuildContext context) {
                   child: Row(
                     children: [
                       Container(
-                        height: 0.03 * getHeight(context),
-                        width: 0.1 * getWidth(context),
+                      
                         decoration: BoxDecoration(
                           color: Colors.green,
                           borderRadius: BorderRadius.circular(5),
@@ -179,18 +178,18 @@ double getChildAspectRatio(BuildContext context) {
                               Text(
                                 recipe.rating.toString(),
                                 style: TextStyle(
-                                  fontSize: 15 * getResponsive(context),
+                                  //fontSize: 15 * getResponsive(context),
                                   color: Colors.white,
                                 ),
                               ),
-                              Icon(Icons.star, size: 15 * getResponsive(context), color: Colors.white),
+                              Icon(Icons.star,  color: Colors.white),
                             ],
                           ),
                         ),
                       ),
                       Text(
                         " (${recipe.reviewCount})",
-                        style: TextStyle(fontSize: 15 * getResponsive(context)),
+                        
                       ),
                     ],
                   ),
@@ -206,7 +205,7 @@ double getChildAspectRatio(BuildContext context) {
   Widget iconInfo(context,IconData icon, String text) {
     return Column(
       children: [
-        Icon(icon, size: 22 * getResponsive(context)),
+        Icon(icon,),
         Text(text),
       ],
     );

@@ -21,7 +21,7 @@ class Widgets {
 
   static InputDecoration searchInputDecoration(
     BuildContext context, {
-    String hint = "Search for recipes, meals...",
+    String hint = "Search recipes...",
   }) {
     return InputDecoration(
       hintText: hint,
@@ -29,12 +29,10 @@ class Widgets {
       filled: true,
       prefixIcon: Icon(Icons.search),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: Colors.white,
-          width: 0.01 * getWidth(context),
-        ),
-        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(12),
       ),
+    
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: Colors.white,

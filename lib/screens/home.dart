@@ -109,8 +109,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 227, 58, 72),
+        elevation: 4,
         title: Icon(
           Icons.menu,
           color: Colors.white,
@@ -118,17 +120,14 @@ class _HomeState extends State<Home> {
         ),
         actions: [
           Container(
-            padding: EdgeInsets.all(8*getResponsive(context)),
-            decoration: BoxDecoration(
-              color: Colors.green.withOpacity(0.1),
-              shape: BoxShape.circle,
-            ),
+            padding: EdgeInsets.all(8 * getResponsive(context)),
+            decoration: BoxDecoration(shape: BoxShape.circle),
             child: IconButton(
               color: Colors.white,
               onPressed: () {
                 Helper.showRecipeOptions(context);
               },
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.add, color: Colors.white),
             ),
           ),
         ],
@@ -162,8 +161,7 @@ class _HomeState extends State<Home> {
               children: [
                 Container(
                   alignment: Alignment.center,
-                  width: 0.20 * getWidth(context),
-                  height: 0.040 * getHeight(context),
+              
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(
@@ -171,25 +169,25 @@ class _HomeState extends State<Home> {
                     ),
                     boxShadow: [BoxShadow(spreadRadius: 1, blurRadius: 1)],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            openFilterBottomSheet();
-                          },
-                          child: Row(
-                            children: [
-                              Icon(Icons.filter_list, size: 20*getResponsive(context)),
-                              SizedBox(width: 0.02 * getWidth(context)),
-                              Text("Filter"),
-                            ],
-                          ),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          openFilterBottomSheet();
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.filter_list,
+                             
+                            ),
+                            SizedBox(width: 0.02 * getWidth(context)),
+                            Text("Filter"),
+                          ],
                         ),
-                        SizedBox(width: 0.01 * getWidth(context)),
-                      ],
-                    ),
+                      ),
+                      SizedBox(width: 0.01 * getWidth(context)),
+                    ],
                   ),
                 ),
                 SizedBox(width: 0.010 * getWidth(context)),
@@ -202,7 +200,6 @@ class _HomeState extends State<Home> {
                   getWidth: getWidth,
                   getHeight: getHeight,
                 ),
-               
               ],
             ),
           ),
@@ -215,10 +212,8 @@ class _HomeState extends State<Home> {
             getWidth: getWidth,
             getHeight: getHeight,
           ),
-         
         ],
       ),
     );
   }
-
 }

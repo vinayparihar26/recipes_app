@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class TagsFilterButton extends StatelessWidget {
@@ -47,10 +46,7 @@ class TagsFilterButton extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 20.0),
                       child: Row(
                         children: [
-                          Text(
-                            " Filter by Tags",
-                          
-                          ),
+                          Text(" Filter by Tags"),
                           Spacer(),
                           IconButton(
                             onPressed: () {
@@ -64,18 +60,19 @@ class TagsFilterButton extends StatelessWidget {
                     ),
                     SizedBox(height: 10 * getResponsive(context)),
                     Wrap(
-                      spacing: 8 * getResponsive(context),
+                        spacing: 8 * getResponsive(context),
                       runSpacing: 8 * getResponsive(context),
-                      children: tagsList.map((tag) {
-                        return ActionChip(
-                          avatar: Icon(Icons.tag),
-                          label: Text(tag),
-                          onPressed: () { 
-                            Navigator.pop(context);
-                            getRecipesByTag(tag);
-                          },
-                        );
-                      }).toList(),
+                      children:
+                          tagsList.map((tag) {
+                            return ActionChip(
+                              avatar: Icon(Icons.tag),
+                              label: Text(tag),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                getRecipesByTag(tag);
+                              },
+                            );
+                          }).toList(),
                     ),
                   ],
                 ),
@@ -86,22 +83,17 @@ class TagsFilterButton extends StatelessWidget {
       },
       icon: Container(
         alignment: Alignment.center,
-        width: 0.20 * getWidth(context),
-        height: 0.040 * getHeight(context),
+
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
-          boxShadow: [BoxShadow(spreadRadius: 1, blurRadius: 1)],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Row(
-            children: [
-              Icon(Icons.tag, size: 20 * getResponsive(context)),
-              SizedBox(width: 0.02 * getWidth(context)),
-              Text("Tags"),
-            ],
-          ),
+        child: Row(
+          children: [
+            Icon(Icons.tag),
+            SizedBox(width: 0.02 * getWidth(context)),
+            Text("Tags"),
+          ],
         ),
       ),
     );
